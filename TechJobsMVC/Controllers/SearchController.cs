@@ -18,5 +18,27 @@ namespace TechJobsMVC.Controllers
         }
 
         // TODO #3: Create an action method to process a search request and render the updated search view. 
+
+        //@RequestMapping(value = "results")
+        //public String results(Model model, @RequestParam String searchType, String searchTerm)
+        //{ //search in ALL columns
+        //    ArrayList<HashMap<String, String>> jobsToPrint = new ArrayList<HashMap<String, String>>();
+        //    if (searchType.equals("all"))
+        //    {
+        //        jobsToPrint = JobData.findByValue(searchTerm);
+
+        //        model.addAttribute("title", searchTerm + " from all columns");
+        //        model.addAttribute("listItems", jobsToPrint);
+        //        model.addAttribute("columns", columnChoices);
+        //    }
+        //    else
+        //    {
+        //        jobsToPrint = JobData.findByColumnAndValue(searchType, searchTerm);
+        //        model.addAttribute("title", searchTerm + " from " + searchType + " columns");
+        //        model.addAttribute("listItems", jobsToPrint);
+        //        model.addAttribute("columns", columnChoices);
+        //    }
+        //    return "search";
+        //}
     }
 }

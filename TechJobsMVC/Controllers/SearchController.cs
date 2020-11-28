@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TechJobsMVC.Data;
+using TechJobsMVC.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,27 +20,24 @@ namespace TechJobsMVC.Controllers
         }
 
         // TODO #3: Create an action method to process a search request and render the updated search view. 
+        public IActionResult Results(String searchType, String searchTerm)
+        {
+            List<Job> jobs = new List<Job>();
+            if (searchType.Equals("all"))
+            {
+                //jobs = JobData.FindAll();
+                jobs = JobData.FindByValue(searchTerm);
+            }
+            else
+            {
+                jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
+            }
 
-        //@RequestMapping(value = "results")
-        //public String results(Model model, @RequestParam String searchType, String searchTerm)
-        //{ //search in ALL columns
-        //    ArrayList<HashMap<String, String>> jobsToPrint = new ArrayList<HashMap<String, String>>();
-        //    if (searchType.equals("all"))
-        //    {
-        //        jobsToPrint = JobData.findByValue(searchTerm);
+            ViewBag.columns = ListController.ColumnChoices;
+            ViewBag.jobs = jobs;
+            ViewBag.searchType = searchType;
 
-        //        model.addAttribute("title", searchTerm + " from all columns");
-        //        model.addAttribute("listItems", jobsToPrint);
-        //        model.addAttribute("columns", columnChoices);
-        //    }
-        //    else
-        //    {
-        //        jobsToPrint = JobData.findByColumnAndValue(searchType, searchTerm);
-        //        model.addAttribute("title", searchTerm + " from " + searchType + " columns");
-        //        model.addAttribute("listItems", jobsToPrint);
-        //        model.addAttribute("columns", columnChoices);
-        //    }
-        //    return "search";
-        //}
+            return View("index");
+        }
     }
 }
